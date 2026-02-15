@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>¿Quieres ser mi novia?</title>
+
+<style>
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    body{
+        height:100vh;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        background: linear-gradient(-45deg, #ff4e91, #ff758c, #ff7eb3, #ffb6c1);
+        background-size:400% 400%;
+        animation: fondo 10s ease infinite;
+        overflow:hidden;
+    }
+
+    @keyframes fondo{
+        0%{background-position:0% 50%;}
+        50%{background-position:100% 50%;}
+        100%{background-position:0% 50%;}
+    }
+
+    .container{
+        text-align:center;
+        color:white;
+        z-index:2;
+        animation: aparecer 1.5s ease;
+    }
+
+    @keyframes aparecer{
+        from{opacity:0; transform:translateY(30px);}
+        to{opacity:1; transform:translateY(0);}
+    }
+
+    h1{
+        font-size:3rem;
+        margin-bottom:20px;
+        text-shadow:2px 2px 10px rgba(0,0,0,0.3);
+    }
+
+    .buttons{
+        margin-top:20px;
+    }
+
+    button{
+        padding:15px 35px;
+        margin:10px;
+        border:none;
+        border-radius:30px;
+        font-size:1.2rem;
+        cursor:pointer;
+        transition:0.3s;
+        position:relative;
+    }
+
+    #yes{
+        background:white;
+        color:#ff4e91;
+        font-weight:bold;
+    }
+
+    #yes:hover{
+        transform:scale(1.1);
+        box-shadow:0 0 15px white;
+    }
+
+    #no{
+        background:#ff2e63;
+        color:white;
+        position:absolute;
+    }
+
+    .heart{
+        position:absolute;
+        color:white;
+        font-size:20px;
+        animation: flotar 6s linear infinite;
+    }
+
+    @keyframes flotar{
+        0%{
+            transform:translateY(100vh);
+            opacity:1;
+        }
+        100%{
+            transform:translateY(-10vh);
+            opacity:0;
+        }
+    }
+
+    .final{
+        display:none;
+        font-size:2.5rem;
+        animation: aparecer 1s ease forwards;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container" id="main">
+    <h1>¿Quieres ser mi novia? ❤️</h1>
+    <div class="buttons">
+        <button id="yes">Sí 💖</button>
+        <button id="no">No 😢</button>
+    </div>
+</div>
+
+<div class="container final" id="final">
+    💕 Sabía que dirías que sí 💕<br><br>
+    Te prometo hacerte muy feliz ❤️
+</div>
+
+<script>
+    const noBtn = document.getElementById("no");
+    const yesBtn = document.getElementById("yes");
+    const final = document.getElementById("final");
+    const main = document.getElementById("main");
+
+    // Botón NO que se mueve
+    noBtn.addEventListener("mouseover", () => {
+        const x = Math.random() * (window.innerWidth - 100);
+        const y = Math.random() * (window.innerHeight - 50);
+        noBtn.style.left = x + "px";
+        noBtn.style.top = y + "px";
+    });
+
+    // Cuando dice SÍ
+    yesBtn.addEventListener("click", () => {
+        main.style.display = "none";
+        final.style.display = "block";
+        lanzarCorazones();
+    });
+
+    // Crear corazones flotando
+    function lanzarCorazones(){
+        setInterval(() => {
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.innerHTML = "❤️";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.fontSize = (Math.random() * 20 + 20) + "px";
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
+        }, 300);
+    }
+</script>
+
+</body>
+</html>
